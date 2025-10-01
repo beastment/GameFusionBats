@@ -1,6 +1,7 @@
 BIG update!
 The lack of this functionality was really starting annoy me. So, I've found a way to effectively add this functionality via a workaround. It sounds a little complicated to set up, but most of this you only have to do once. Trust me, it's very easy to map new games after the initial setup, and works fantastic once you've done it for your first game. This is using GameHub 5.1.0, on an S25Ultra.
 
+
 INITIAL SET UP (ONLY NEED TO DO ONCE)
 Grab a copy AntiMicroX (a rather good controller mapper) from here (You want the portable version): https://github.com/AntiMicroX/antimicrox/releases/tag/3.5.1
 Now grab a copy of GUIPropView (this is used for switching to and from AntiMicroX) from here (32 bit): https://www.nirsoft.net/utils/gui_prop_view.html
@@ -11,12 +12,15 @@ Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin...
 Internal storage\Download\guipropview\...
 Internal Storage\Download\GameFusionBats\...
 
+
 PER GAME SET UP (NEED TO DO FOR EACH GAME)
 Alright, that's the main set up done. Now for each game that you want to map controls for:
  - Make sure you have the game up and working
  - Head into Gamehub and enter the container desktop (make sure "Disable Window Manager" is deactivated)
  - In the file explorer, head to your D drive, and then copy the four files under GameFusionBats to where your game.exe file is (usually the root folder of your X drive). You may find it easier to have two file explorer windows open.
  - Now run setup.bat from your X drive. A cmd window will open and it will iterate through any .exe files in the folder. You need to tell it which one is your game file (e.g. PlanetBase.exe).
+
+
 
 FINAL SET UP (ONLY NEED TO DO ONCE):
 Now, go back to your D drive, and launch: Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin\antimicrox.exe
@@ -28,7 +32,10 @@ Launch in tray - off
 Press OK (you may need to drag the window up to see the OK button)
 Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit.
 
+
 THAT'S IT! YOU'RE DONE!
+
+
 Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. It should even persist through a game data reset. The GH-Default Profile is my set up for PlanetBase, which should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to. Enjoy!
 
 And if you want an explanation of how I got here...
