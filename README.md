@@ -1,19 +1,23 @@
 BIG update!
+
 The lack of this functionality was really starting annoy me. So, I've found a way to effectively add this functionality via a workaround. It sounds a little complicated to set up, but most of this you only have to do once. Trust me, it's very easy to map new games after the initial setup, and works fantastic once you've done it for your first game. This is using GameHub 5.1.0, on an S25Ultra.
 
 
 INITIAL SET UP (ONLY NEED TO DO ONCE)
-Grab a copy AntiMicroX (a rather good controller mapper) from here (You want the portable version): https://github.com/AntiMicroX/antimicrox/releases/tag/3.5.1
-Now grab a copy of GUIPropView (this is used for switching to and from AntiMicroX) from here (32 bit): https://www.nirsoft.net/utils/gui_prop_view.html
-Now grab of my files from here (just the zip file, and then extract the four files): https://github.com/beastment/GameFusionBats/releases/tag/Release
+
+ - Grab a copy AntiMicroX (a rather good controller mapper) from here (You want the portable version): https://github.com/AntiMicroX/antimicrox/releases/tag/3.5.1
+ - Now grab a copy of GUIPropView (this is used for switching to and from AntiMicroX) from here (32 bit): https://www.nirsoft.net/utils/gui_prop_view.html
+ - Now grab of my files from here (just the zip file, and then extract the four files): https://github.com/beastment/GameFusionBats/releases/tag/Release
 
 These should all go in the Download folder of your device. You should have folder structures like this:
-Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin...
-Internal storage\Download\guipropview\...
-Internal Storage\Download\GameFusionBats\...
+
+ - Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin...
+ - Internal storage\Download\guipropview\...
+ - Internal Storage\Download\GameFusionBats\...
 
 
 PER GAME SET UP (NEED TO DO FOR EACH GAME)
+
 Alright, that's the main set up done. Now for each game that you want to map controls for:
  - Make sure you have the game up and working
  - Head into Gamehub and enter the container desktop (make sure "Disable Window Manager" is deactivated)
@@ -23,14 +27,15 @@ Alright, that's the main set up done. Now for each game that you want to map con
 
 
 FINAL SET UP (ONLY NEED TO DO ONCE):
-Now, go back to your D drive, and launch: Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin\antimicrox.exe
-Go to Options > Settings, and ensure the following:
-Close to tray - Off
-Minimize to taskbar - Off
-Autoload last open profile - On
-Launch in tray - off
-Press OK (you may need to drag the window up to see the OK button)
-Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit.
+
+ - Now, go back to your D drive, and launch: Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin\antimicrox.exe
+ - Go to Options > Settings, and ensure the following:
+ - Close to tray - Off
+ - Minimize to taskbar - Off
+ - Autoload last open profile - On
+ - Launch in tray - off
+ - Press OK (you may need to drag the window up to see the OK button)
+ - Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit.
 
 
 THAT'S IT! YOU'RE DONE!
