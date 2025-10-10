@@ -35,7 +35,7 @@ FINAL SET UP (ONLY NEED TO DO ONCE):
  - Autoload last open profile - On
  - Launch in tray - off
  - Press OK (you may need to drag the window up to see the OK button)
- - Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit.
+ - Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit. (UPDATE: You will actually need to put the profile on your C Drive, as X changes to S before antimicrox launches)
 
 
 THAT'S IT! YOU'RE DONE!
