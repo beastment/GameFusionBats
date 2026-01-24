@@ -3,7 +3,8 @@ setlocal enabledelayedexpansion
 
 :: Clean up any prior bad exit
 if exist "exebat.exe" (
-    ren "exebat.exe" "exebat.pre")
+    ren "exebat.exe" "exebat.pre"
+)
 
 :: Build a list of exe files
 set i=0
@@ -28,36 +29,40 @@ if %idx% gtr %total% (
 set "current=!file[%idx%]!"
 echo(
 echo File %idx% of %total%: %current%
-set /p CONFIRM=Is this the main game app? (Y/N/Q): 
 
-if /I "%CONFIRM%"=="Y" (
-    for %%X in ("%current%") do set "BASENAME=%%~nX"
-    set "REALFILE=!BASENAME!-real.exe"
-    set "NEWFILE=!BASENAME!.exe"
+:: Single-key prompt (no Enter)
+choice /c YNQ /n /m "Is this the main game app? (Y/N/Q): "
 
-    if exist "!REALFILE!" (
-        echo Skipping: "!REALFILE!" already exists.
-        exit /b 1
-    )
-
-    echo Renaming "%current%" to "!REALFILE!" ...
-    ren "%current%" "!REALFILE!"
-
-    if exist "exebat.pre" (
-        echo Renaming exebat.pre to "!NEWFILE!" ...
-        ren "exebat.pre" "!NEWFILE!"
-    ) else (
-        echo exebat.pre not found!
-    )
-
-    echo Done. Exiting.
-    exit /b 0
-)
-
-if /I "%CONFIRM%"=="Q" (
+:: CHOICE sets ERRORLEVEL:
+:: 1=Y, 2=N, 3=Q
+if errorlevel 3 (
     echo Quit requested. Exiting.
     exit /b 0
 )
+if errorlevel 2 (
+    set /a idx+=1
+    goto :nextfile
+)
+:: Otherwise it's Y
 
-set /a idx+=1
-goto :nextfile
+for %%X in ("%current%") do set "BASENAME=%%~nX"
+set "REALFILE=!BASENAME!-real.exe"
+set "NEWFILE=!BASENAME!.exe"
+
+if exist "!REALFILE!" (
+    echo Skipping: "!REALFILE!" already exists.
+    exit /b 1
+)
+
+echo Renaming "%current%" to "!REALFILE!" ...
+ren "%current%" "!REALFILE!"
+
+if exist "exebat.pre" (
+    echo Renaming exebat.pre to "!NEWFILE!" ...
+    ren "exebat.pre" "!NEWFILE!"
+) else (
+    echo exebat.pre not found!
+)
+
+echo Done. Exiting.
+exit /b 0
