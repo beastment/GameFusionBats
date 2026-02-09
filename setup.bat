@@ -8,6 +8,11 @@ setlocal enabledelayedexpansion
 set "MARKERCOUNT=0"
 set "MARKERBASE="
 
+:: Move profile to C drive
+if exist "GH-Default Profile.amgp" (
+    move /Y "GH-Default Profile.amgp" "C:\GH-Default Profile.amgp" >NUL
+)
+
 :: Clean up any prior bad exit
 if exist "exebat.exe" (
     ren "exebat.exe" "exebat.pre"
