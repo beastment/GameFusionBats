@@ -9,7 +9,7 @@ INITIAL SET UP (ONLY NEED TO DO ONCE)
  - Now grab a copy of GUIPropView (this is used for switching to and from AntiMicroX) from here (32 bit): https://www.nirsoft.net/utils/gui_prop_view.html
  - Now grab of my files from here (just the zip file, and then extract the four files): https://github.com/beastment/GameFusionBats/releases/tag/Release
 
-These should all go in the Download folder of your device. You should have folder structures like this:
+These should all go in the Download folder of your device (D Drive when in Gamefusion). You should have folder structures like this:
 
  - Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin...
  - Internal storage\Download\guipropview\...
@@ -22,7 +22,7 @@ Alright, that's the main set up done. Now for each game that you want to map con
  - Make sure you have the game up and working
  - Head into Gamehub and enter the container desktop (make sure "Disable Window Manager" is deactivated)
  - In the file explorer, head to your D drive, and then copy the four files under GameFusionBats to where your game.exe file is (usually the root folder of your X drive). You may find it easier to have two file explorer windows open.
- - Now run setup.bat from your X drive. A cmd window will open and it will iterate through any .exe files in the folder. You need to tell it which one is your game file (e.g. PlanetBase.exe).
+ - Now run setup.bat from your X drive. A cmd window will open and it will iterate through any .exe files in the folder. If you have multiple exe files you will need to tell it which one is your game file (althought it will automatically exclude some common system files)
 
 
 
@@ -35,13 +35,24 @@ FINAL SET UP (ONLY NEED TO DO ONCE):
  - Autoload last open profile - On
  - Launch in tray - off
  - Press OK (you may need to drag the window up to see the OK button)
- - Now in the main window, Load Profile, and select GH-Default Profile from your X drive. Save, and exit. (UPDATE: You will actually need to put the profile on your C Drive, as X changes to S before antimicrox launches)
+ - Now in the main window, Load Profile, and select GH-Default Profile from your C drive. Save, and exit. (UPDATE: the setup file now moves this from X drive to C drive).
 
 
 THAT'S IT! YOU'RE DONE!
 
 
-Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. It should even persist through a game data reset. The GH-Default Profile is my set up for PlanetBase, which should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to. Enjoy!
+Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. It should even persist through a game data reset. The GH-Default Profile should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to.
+
+If you make changes to the profile, you MUST SAVE IT WITH THE SAME NAME AND LOCATION: "C:\GH-Default Profile.amgp". This is where antimicrox will look for the profile next time. If you follow this rule, then you will find that a copy of your profile is automatically placed in D:\antimicrox-3.5.1-portablewindows-amd64\profiles\!YOURGAMENAME!.amgp for safekeeping.
+
+Enjoy!
+
+
+CRASHES:
+
+Emulation being what it is, you may find that if the game crashes then the files you copied above will be in a somewhat broken/renamed state, and the game will likely launch without antimicrox support. To fix this, just run setup.bat again.
+
+
 
 And if you want an explanation of how I got here...
 
@@ -59,3 +70,5 @@ So Planetbase.exe (exebat.exe) has now exited, and helper.bat is running. Helper
 If the game crashes or doesn't exit properly, then it's possible you can get stuck with files not named correctly. Just run setup.bat again and it should fix it.
 
 Now I discovered that it's a real pain in the neck to have to go in to the container to change your mappings. After a lot of failed solutions, I finally achieved success with GUIPropViewer. This awesome little program needs no installation, and gives you lots of ways to manipulate windows. It was still a lot of trial and error and most methods didn't work, but I eventually found a way to have AntiMicroX call GUIPropViewer to switch to the mapper. Switching back to the game though was even harder, as there is no taskbar present. It now searches for any minimized windows (there should only be one at this stage, your main game.exe) and then maximizes them. Putting you nicely back in the game. 
+
+UPDATE: I'm now using a different approach to switch back to the game, still using guipropview, but some different commands. Seems more stable.
