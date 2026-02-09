@@ -1,10 +1,9 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal EnableExtensions DisableDelayedExpansion
 
-:: =========================================================
-:: STEP 0: If a *.gfbats marker exists, use it to choose exe
-:: e.g. Timberborn.gfbats -> Timberborn.exe
-:: =========================================================
+REM -----------------------------
+REM STEP 0: marker override
+REM -----------------------------
 set "MARKERCOUNT=0"
 set "MARKERBASE="
 
@@ -13,102 +12,136 @@ if exist "GH-Default Profile.amgp" (
     move /Y "GH-Default Profile.amgp" "C:\GH-Default Profile.amgp" >NUL
 )
 
-:: Clean up any prior bad exit
-if exist "exebat.exe" (
-    ren "exebat.exe" "exebat.pre"
-)
+REM Enumerate markers without using a (...) block
+for %%m in (*.gfbats) do if exist "%%m" call :count_marker "%%~nm"
 
-for %%m in (*.gfbats) do (
-    set /a MARKERCOUNT+=1
-    set "MARKERBASE=%%~nm"
-)
+if %MARKERCOUNT%==1 goto usemarker
+if %MARKERCOUNT% GTR 1 goto multimarker
+goto nomarker
 
-if %MARKERCOUNT%==1 (
-    set "current=%MARKERBASE%.exe"
-    echo Found marker: "%MARKERBASE%.gfbats"
-    echo Using exe from marker: "%current%"
-    goto :confirmed
-) else if %MARKERCOUNT% gtr 1 (
-    echo(
-    echo Multiple .gfbats marker files found. Falling back to EXE search:
-    for %%m in (*.gfbats) do echo   - %%~nxm
-    echo(
-)
+:usemarker
+set "current=%MARKERBASE%.exe"
+echo Found marker: "%MARKERBASE%.gfbats"
+echo Using exe from marker: "%current%"
+goto confirmed
 
-:: Build a list of eligible exe files (end with .exe, excluding known non-targets)
-set i=0
-for %%f in (*.exe) do (
-    if /I not "%%~nxf"=="exebat.exe" (
-    if /I not "%%~nxf"=="exebat.pre" (
-    if /I not "%%~nxf"=="UnityCrashHandler64.exe" (
-    if /I not "%%~nxf"=="UnityCrashHandler32.exe" (
-        set /a i+=1
-        set "file[!i!]=%%~nxf"
-    ))))
-)
-set total=%i%
+:multimarker
+echo.
+echo Multiple .gfbats marker files found. Falling back to EXE search:
+for %%m in (*.gfbats) do if exist "%%m" echo   - %%~nxm
+echo.
+goto nomarker
 
-if %total%==0 (
-    echo No eligible .exe files found.
-    exit /b 1
-)
+:nomarker
 
-:: If there's only one eligible EXE, skip prompt and use it
-if %total%==1 (
-    set "current=!file[1]!"
-    echo(
-    echo Only one eligible .exe found: !current!
-    goto :confirmed
-)
+REM -----------------------------
+REM Clean up any prior bad exit
+REM -----------------------------
+if exist "exebat.exe" ren "exebat.exe" "exebat.pre"
 
-set idx=1
+REM -----------------------------
+REM Build list of eligible EXEs
+REM -----------------------------
+set "count=0"
+
+if not exist "*.exe" goto noexes
+for %%f in (*.exe) do if exist "%%f" call :maybe_add_exe "%%~nxf"
+
+if %count%==0 goto noeligible
+if %count%==1 goto oneexe
+goto chooseexe
+
+:noexes
+echo No .exe files found.
+exit /b 1
+
+:noeligible
+echo No eligible .exe files found.
+exit /b 1
+
+:oneexe
+call set "current=%%exe1%%"
+echo.
+echo Only one eligible .exe found: %current%
+goto confirmed
+
+:chooseexe
+set "idx=1"
+
 :nextfile
-if %idx% gtr %total% (
-    echo No game app confirmed. Exiting.
-    exit /b 1
-)
+if %idx% GTR %count% goto noconfirm
 
-set "current=!file[%idx%]!"
-echo(
-echo File %idx% of %total%: !current!
+call set "current=%%exe%idx%%%"
+echo.
+echo File %idx% of %count%: %current%
 
-:: Single-key prompt (no Enter)
+REM (If you want to skip prompting in Proton, just uncomment the next line)
+REM goto confirmed
+
 choice /c YNQ /n /m "Is this the main game app? (Y/N/Q): "
+if errorlevel 3 goto quit
+if errorlevel 2 goto notthis
+goto confirmed
 
-:: CHOICE sets ERRORLEVEL:
-:: 1=Y, 2=N, 3=Q
-if errorlevel 3 (
-    echo Quit requested. Exiting.
-    exit /b 0
-)
-if errorlevel 2 (
-    set /a idx+=1
-    goto :nextfile
-)
+:notthis
+set /a idx+=1
+goto nextfile
+
+:noconfirm
+echo No game app confirmed. Exiting.
+exit /b 1
+
+:quit
+echo Quit requested. Exiting.
+exit /b 0
+
 
 :confirmed
-for %%X in ("!current!") do set "BASENAME=%%~nX"
-set "REALFILE=!BASENAME!-real.exe"
-set "NEWFILE=!BASENAME!.exe"
+for %%X in ("%current%") do set "BASENAME=%%~nX"
+set "REALFILE=%BASENAME%-real.exe"
+set "NEWFILE=%BASENAME%.exe"
 
-:: Create marker file: e.g. timberborn.gfbats (empty; overwrites if exists)
-set "MARKER=!BASENAME!.gfbats"
-break > "!MARKER!"
+REM Create marker file (overwrites)
+set "MARKER=%BASENAME%.gfbats"
+break > "%MARKER%"
 
-if exist "!REALFILE!" (
-    echo Skipping: "!REALFILE!" already exists.
-    exit /b 1
-)
+if exist "%REALFILE%" goto realexists
 
-echo Renaming "!current!" to "!REALFILE!" ...
-ren "!current!" "!REALFILE!"
+echo Renaming "%current%" to "%REALFILE%" ...
+ren "%current%" "%REALFILE%"
 
-if exist "exebat.pre" (
-    echo Renaming exebat.pre to "!NEWFILE!" ...
-    ren "exebat.pre" "!NEWFILE!"
-) else (
-    echo exebat.pre not found!
-)
+if exist "exebat.pre" goto renamepre
+echo exebat.pre not found!
+goto done
 
+:renamepre
+echo Renaming exebat.pre to "%NEWFILE%" ...
+ren "exebat.pre" "%NEWFILE%"
+goto done
+
+:realexists
+echo Skipping: "%REALFILE%" already exists.
+exit /b 1
+
+:done
 echo Done. Exiting.
 exit /b 0
+
+
+:count_marker
+set /a MARKERCOUNT+=1
+set "MARKERBASE=%~1"
+exit /b
+
+
+:maybe_add_exe
+set "F=%~1"
+
+if /I "%F%"=="exebat.exe" exit /b
+if /I "%F%"=="exebat.pre" exit /b
+if /I "%F%"=="UnityCrashHandler64.exe" exit /b
+if /I "%F%"=="UnityCrashHandler32.exe" exit /b
+
+set /a count+=1
+call set "exe%%count%%=%F%"
+exit /b
