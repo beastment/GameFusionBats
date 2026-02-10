@@ -38,6 +38,7 @@ REM -----------------------------
 REM Clean up any prior bad exit
 REM -----------------------------
 if exist "exebat.exe" ren "exebat.exe" "exebat.pre"
+if exist "*-real.exe" ren "*-real.exe" "*.exe"
 
 REM -----------------------------
 REM Build list of eligible EXEs
@@ -145,3 +146,4 @@ if /I "%F%"=="UnityCrashHandler32.exe" exit /b
 set /a count+=1
 call set "exe%%count%%=%F%"
 exit /b
+
