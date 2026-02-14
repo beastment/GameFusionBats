@@ -7,13 +7,13 @@ INITIAL SET UP (ONLY NEED TO DO ONCE)
 
  - Grab a copy AntiMicroX (a rather good controller mapper) from here (You want the portable version): https://github.com/AntiMicroX/antimicrox/releases/tag/3.5.1
  - Now grab a copy of GUIPropView (this is used for switching to and from AntiMicroX) from here (32 bit): https://www.nirsoft.net/utils/gui_prop_view.html
- - Now grab of my files from here (just the zip file, and then extract the four files): https://github.com/beastment/GameFusionBats/releases/tag/Release
+ - Now grab a copy of my files from here (just the zip file, and then extract the five files): https://github.com/beastment/GameFusionBats/releases/tag/Release
 
 These should all go in the Download folder of your device (D Drive when in Gamefusion). You should have folder structures like this:
 
- - Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin...
- - Internal storage\Download\guipropview\...
- - Internal Storage\Download\GameFusionBats\...
+ - D:\antimicrox-3.5.1-portablewindows-amd64\bin...
+ - D:\guipropview\...
+ - D:\GameFusionBats\...
 
 
 PER GAME SET UP (NEED TO DO FOR EACH GAME)
@@ -21,21 +21,18 @@ PER GAME SET UP (NEED TO DO FOR EACH GAME)
 Alright, that's the main set up done. Now for each game that you want to map controls for:
  - Make sure you have the game up and working
  - Head into Gamehub and enter the container desktop (make sure "Disable Window Manager" is deactivated)
- - In the file explorer, head to your D drive, and then copy the four files under GameFusionBats to where your game.exe file is (usually the root folder of your X drive). You may find it easier to have two file explorer windows open.
- - Now run setup.bat from your X drive. A cmd window will open and it will iterate through any .exe files in the folder. If you have multiple exe files you will need to tell it which one is your game file (althought it will automatically exclude some common system files)
-
-
+ - In the file explorer, head to your D drive, and then run install.bat
 
 FINAL SET UP (ONLY NEED TO DO ONCE):
 
- - Now, go back to your D drive, and launch: Internal storage\Download\antimicrox-3.5.1-portablewindows-amd64\bin\antimicrox.exe
+ - Now, go back to your D drive, and launch: D:\antimicrox-3.5.1-portablewindows-amd64\bin\antimicrox.exe
  - Go to Options > Settings, and ensure the following:
  - Close to tray - Off
  - Minimize to taskbar - Off
  - Autoload last open profile - On
  - Launch in tray - off
  - Press OK (you may need to drag the window up to see the OK button)
- - Now in the main window, Load Profile, and select GH-Default Profile from your C drive. Save, and exit. (UPDATE: the setup file now moves this from X drive to C drive).
+ - Now in the main window, Load Profile, and select GH-Default Profile from your C drive. Save, and exit.
 
 
 THAT'S IT! YOU'RE DONE!
@@ -43,7 +40,7 @@ THAT'S IT! YOU'RE DONE!
 
 Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. It should even persist through a game data reset. The GH-Default Profile should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to.
 
-If you make changes to the profile, you MUST SAVE IT WITH THE SAME NAME AND LOCATION: "C:\GH-Default Profile.amgp". This is where antimicrox will look for the profile next time. If you follow this rule, then you will find that a copy of your profile is automatically placed in D:\antimicrox-3.5.1-portablewindows-amd64\profiles\!YOURGAMENAME!.amgp for safekeeping.
+If you make changes to the profile, you MUST SAVE IT WITH THE SAME NAME AND LOCATION: "C:\GH-Default Profile.amgp". This is where antimicrox will look for the profile next time. If you follow this rule, then you will automatically have a different profile loaded for each game, and a copy of your profile is automatically placed in D:\antimicrox-3.5.1-portablewindows-amd64\profiles\!YOURGAMENAME!.amgp for safekeeping.
 
 Enjoy!
 
