@@ -7,11 +7,6 @@ REM -----------------------------
 set "MARKERCOUNT=0"
 set "MARKERBASE="
 
-:: Move profile to C drive
-if exist "GH-Default Profile.amgp" (
-    move /Y "GH-Default Profile.amgp" "C:\GH-Default Profile.amgp" >NUL
-)
-
 REM Enumerate markers without using a (...) block
 for %%m in (*.gfbats) do if exist "%%m" call :count_marker "%%~nm"
 
@@ -146,4 +141,5 @@ if /I "%F%"=="UnityCrashHandler32.exe" exit /b
 set /a count+=1
 call set "exe%%count%%=%F%"
 exit /b
+
 
