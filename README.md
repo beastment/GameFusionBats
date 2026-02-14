@@ -38,7 +38,7 @@ FINAL SET UP (ONLY NEED TO DO ONCE):
 THAT'S IT! YOU'RE DONE!
 
 
-Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. It should even persist through a game data reset. The GH-Default Profile should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to.
+Now, when you launch the game, antimicrox will be running in the background and applying your mappings. You press LEFT THUMBSTICK + LEFT SHOULDER to switch to antimicrox and make any changes you like to the mappings (make sure to save them), and then press LEFT THUMBSTICK + RIGHT SHOULDER to switch back to your game. The GH-Default Profile should be enough to get you started, or let me know if you have a better one. You can even also add a virtual on screen controller as well if you want to.
 
 If you make changes to the profile, you MUST SAVE IT WITH THE SAME NAME AND LOCATION: "C:\GH-Default Profile.amgp". This is where antimicrox will look for the profile next time. If you follow this rule, then you will automatically have a different profile loaded for each game, and a copy of your profile is automatically placed in D:\antimicrox-3.5.1-portablewindows-amd64\profiles\!YOURGAMENAME!.amgp for safekeeping.
 
